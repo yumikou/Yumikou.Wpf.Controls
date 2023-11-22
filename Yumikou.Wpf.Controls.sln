@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34309.116
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Yumikou.Wpf.Controls", "src\Yumikou.Wpf.Controls\Yumikou.Wpf.Controls.csproj", "{66C0BD68-BBC1-47FE-9065-F5694D1DD730}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Yumikou.Wpf.Controls.Sample", "src\Yumikou.Wpf.Controls.Sample\Yumikou.Wpf.Controls.Sample.csproj", "{5BD1AF56-C3A4-4094-B06B-1973D0A44840}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{66C0BD68-BBC1-47FE-9065-F5694D1DD730}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{66C0BD68-BBC1-47FE-9065-F5694D1DD730}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{66C0BD68-BBC1-47FE-9065-F5694D1DD730}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{66C0BD68-BBC1-47FE-9065-F5694D1DD730}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5BD1AF56-C3A4-4094-B06B-1973D0A44840}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5BD1AF56-C3A4-4094-B06B-1973D0A44840}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5BD1AF56-C3A4-4094-B06B-1973D0A44840}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5BD1AF56-C3A4-4094-B06B-1973D0A44840}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {45037531-B611-4CB8-919A-C980B8B9914E}
+	EndGlobalSection
+EndGlobal

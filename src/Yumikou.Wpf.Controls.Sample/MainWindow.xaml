@@ -1,0 +1,43 @@
+﻿<Window x:Class="Yumikou.Wpf.Controls.Sample.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Yumikou.Wpf.Controls.Sample"
+        xmlns:ymk="clr-namespace:Yumikou.Wpf.Controls;assembly=Yumikou.Wpf.Controls"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <TabControl TabStripPlacement="Left">
+            <TabItem Header="Border">
+                <ymk:Border Grid.Row="1" Width="100" Height="100" Background="Transparent" CornerRadius="30" UseLayoutRounding="True">
+                    <ymk:Border.BoxShadows>
+                        <ymk:BoxShadow Blur="0" Spread="10" Brush="#6600ff00" OffsetX="0" OffsetY="0"></ymk:BoxShadow>
+                        <ymk:BoxShadow Blur="20" Spread="5" Brush="#88ff0000" OffsetX="20" OffsetY="20"></ymk:BoxShadow>
+                    </ymk:Border.BoxShadows>
+                </ymk:Border>
+            </TabItem>
+            <TabItem Header="WrapPanel">
+                <ymk:WrapPanel Orientation="Horizontal" HorizontalSpacing="20" VerticalSpacing="10">
+                    <Button>Button</Button>
+                    <Button>Button</Button>
+                    <Button>Button</Button>
+                    <Button>Button</Button>
+                    <Button>Button</Button>
+                    <Button>Button</Button>
+                    <Button>Button</Button>
+                    <Button>Button</Button>
+                    <Button>Button</Button>
+                    <Button>Button</Button>
+                    <Button>Button</Button>
+                    <Button>Button</Button>
+                    <Button>Button</Button>
+                    <Button>Button</Button>
+                    <Button>Button</Button>
+                    <Button>Button</Button>
+                    <Button>Button</Button>
+                </ymk:WrapPanel>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</Window>
