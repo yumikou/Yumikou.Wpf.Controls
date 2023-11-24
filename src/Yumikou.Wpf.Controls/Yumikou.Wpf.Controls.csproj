@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net40-windows;net46-windows;netcoreapp3.0;net6.0-windows</TargetFrameworks>
+    <TargetFrameworks>net40;net45;net46;net47;net48;netcoreapp3.0;net5.0-windows;net6.0-windows</TargetFrameworks>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
@@ -9,9 +9,10 @@
     <Title>Yumikou.Wpf.Controls</Title>
     <Authors>yumikou</Authors>
     <Description>Extended controls for Wpf. The Border has BoxShadow like as Web css3, a WrapPanel that can adjust the spacing.</Description>
-    <PackageTags>wpf;boxshadow;box;shadow;spacing wrappanel;</PackageTags>
+    <PackageTags>wpf;boxshadow;box;shadow;spacing;wrappanel;</PackageTags>
     <PackageProjectUrl>https://github.com/yumikou/Yumikou.Wpf.Controls</PackageProjectUrl>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <Version>1.0.1</Version>
   </PropertyGroup>
 
 </Project>
