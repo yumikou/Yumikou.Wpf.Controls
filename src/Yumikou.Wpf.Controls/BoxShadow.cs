@@ -27,19 +27,19 @@ namespace Yumikou.Wpf.Controls
             set { SetValue(OffsetYProperty, value); }
         }
 
-        public double Spread
+        public double SpreadRadius
         {
-            get { return (double)GetValue(SpreadProperty); }
-            set { SetValue(SpreadProperty, value); }
+            get { return (double)GetValue(SpreadRadiusProperty); }
+            set { SetValue(SpreadRadiusProperty, value); }
         }
 
         /// <summary>
         /// 模糊半径
         /// </summary>
-        public double Blur
+        public double BlurRadius
         {
-            get { return (double)GetValue(BlurProperty); }
-            set { SetValue(BlurProperty, value); }
+            get { return (double)GetValue(BlurRadiusProperty); }
+            set { SetValue(BlurRadiusProperty, value); }
         }
 
         public KernelType BlurKernelType
@@ -75,17 +75,17 @@ namespace Yumikou.Wpf.Controls
                                           new PropertyMetadata(0.0));
 
         /// <summary>
-        /// DependencyProperty for <see cref="Spread" /> property.
+        /// DependencyProperty for <see cref="SpreadRadius" /> property.
         /// </summary>
-        public static readonly DependencyProperty SpreadProperty
-            = DependencyProperty.Register("Spread", typeof(double), typeof(BoxShadow),
+        public static readonly DependencyProperty SpreadRadiusProperty
+            = DependencyProperty.Register("SpreadRadius", typeof(double), typeof(BoxShadow),
                                           new PropertyMetadata(0.0));
 
         /// <summary>
-        /// DependencyProperty for <see cref="Blur" /> property.
+        /// DependencyProperty for <see cref="BlurRadius" /> property.
         /// </summary>
-        public static readonly DependencyProperty BlurProperty
-            = DependencyProperty.Register("Blur", typeof(double), typeof(BoxShadow),
+        public static readonly DependencyProperty BlurRadiusProperty
+            = DependencyProperty.Register("BlurRadius", typeof(double), typeof(BoxShadow),
                                           new PropertyMetadata(0.0));
 
         /// <summary>

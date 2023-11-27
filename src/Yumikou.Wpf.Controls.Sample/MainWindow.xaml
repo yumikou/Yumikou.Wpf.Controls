@@ -12,8 +12,8 @@
             <TabItem Header="Border">
                 <ymk:Border Grid.Row="1" Width="100" Height="100" Background="Transparent" CornerRadius="30" UseLayoutRounding="True">
                     <ymk:Border.BoxShadows>
-                        <ymk:BoxShadow Blur="0" Spread="10" Brush="#6600ff00" OffsetX="0" OffsetY="0"></ymk:BoxShadow>
-                        <ymk:BoxShadow Blur="20" Spread="5" Brush="#88ff0000" OffsetX="20" OffsetY="20"></ymk:BoxShadow>
+                        <ymk:BoxShadow BlurRadius="0" SpreadRadius="10" Brush="#6600ff00" OffsetX="0" OffsetY="0"></ymk:BoxShadow>
+                        <ymk:BoxShadow BlurRadius="20" SpreadRadius="5" Brush="#88ff0000" OffsetX="20" OffsetY="20"></ymk:BoxShadow>
                     </ymk:Border.BoxShadows>
                 </ymk:Border>
             </TabItem>

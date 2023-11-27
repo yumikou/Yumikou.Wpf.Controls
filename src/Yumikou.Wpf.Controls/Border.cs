@@ -83,7 +83,7 @@ namespace Yumikou.Wpf.Controls
                 {
                     if (boxShadow.Brush != null)
                     {
-                        Thickness spreadBorders = new Thickness(boxShadow.Spread);
+                        Thickness spreadBorders = new Thickness(boxShadow.SpreadRadius);
 #if NET46_OR_GREATER || NETCOREAPP
                         if (this.UseLayoutRounding)
                         {
@@ -102,7 +102,7 @@ namespace Yumikou.Wpf.Controls
                         }
                         outerGeometry.Freeze();
 
-                        if (!MathHelper.IsZero(boxShadow.Blur))
+                        if (!MathHelper.IsZero(boxShadow.BlurRadius))
                         {
                             DrawingVisual outerShadowDv = new DrawingVisual();
                             using (var outerShadowDvContext = outerShadowDv.RenderOpen())
@@ -111,13 +111,13 @@ namespace Yumikou.Wpf.Controls
                             }
                             outerShadowDv.Effect = new BlurEffect()
                             {
-                                Radius = boxShadow.Blur,
+                                Radius = boxShadow.BlurRadius,
                                 KernelType = boxShadow.BlurKernelType,
                                 RenderingBias = boxShadow.BlurRenderingBias
                             };
                             VisualBrush outerShadowVb = new VisualBrush();
                             outerShadowVb.Visual = outerShadowDv;
-                            Rect outerShadowRect = DrawingHelper.InflateRect(outerRect, new Thickness(boxShadow.Blur));
+                            Rect outerShadowRect = DrawingHelper.InflateRect(outerRect, new Thickness(boxShadow.BlurRadius));
                             RectangleGeometry outerShadowRectGeometry = new RectangleGeometry(outerShadowRect);
                             PathGeometry shadowGeometry = CombinedGeometry.Combine(outerShadowRectGeometry, innerGeometry, GeometryCombineMode.Exclude, null);
                             dc.DrawGeometry(outerShadowVb, null, shadowGeometry);
