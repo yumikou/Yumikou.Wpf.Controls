@@ -28,7 +28,7 @@ Supporting .NET Framework 4.0 and greater, .NET Core 3.0 and greater(on Windows)
         </ymk:Border.BoxShadows>
     </ymk:Border>
    ```
-   <img alt="Border with BoxShadow" src="https://github.com/yumikou/Yumikou.Wpf.Controls/raw/master/docs/Border.png" />
+   ![Border with BoxShadow](https://raw.githubusercontent.com/yumikou/Yumikou.Wpf.Controls/master/docs/Border.png)
 
    #### WrapPanel can adjust the spacing
    ```xaml
@@ -38,7 +38,7 @@ Supporting .NET Framework 4.0 and greater, .NET Core 3.0 and greater(on Windows)
         ...
     </ymk:WrapPanel>
    ```
-   <img alt="WrapPanel can adjust the spacing" src="https://github.com/yumikou/Yumikou.Wpf.Controls/raw/master/docs/WrapPanel.png">
+   ![WrapPanel can adjust the spacing](https://raw.githubusercontent.com/yumikou/Yumikou.Wpf.Controls/master/docs/WrapPanel.png)
 
 ## TODO
    - Blur effect of inset BoxShadow
