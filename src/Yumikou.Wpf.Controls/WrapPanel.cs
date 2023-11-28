@@ -20,7 +20,7 @@ namespace Yumikou.Wpf.Controls
     /// 
     /// All children get the layout partition of size ItemWidth x ItemHeight.
     /// 
-    /// 使用 HorizontalSpacing 和 VerticalSpacing 设置元素间距
+    /// Use HorizontalSpacing and VerticalSpacing set children spacing
     /// </summary>
     public class WrapPanel : Panel
     {

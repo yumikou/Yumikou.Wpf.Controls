@@ -17,7 +17,7 @@ using Yumikou.Wpf.Controls.Helpers;
 namespace Yumikou.Wpf.Controls
 {
     /// <summary>
-    /// 使用 <see cref="BoxShadows" /> 设置阴影
+    /// use <see cref="BoxShadows" /> set shadow
     /// </summary>
     public class Border : System.Windows.Controls.Border
     {
@@ -35,7 +35,7 @@ namespace Yumikou.Wpf.Controls
 
 #if NET46_OR_GREATER || NETCOREAPP
 #else
-        protected override Geometry? GetLayoutClip(Size layoutSlotSize) // bug fixed: net46以下, 设置UseLayoutRound=true时，会导致ClipToBounds=false失效
+        protected override Geometry? GetLayoutClip(Size layoutSlotSize) // Bug fixed: Before net46, the UseLayoutRound=true would cause ClipToBounds=false to fail
         {
             return this.ClipToBounds ? base.GetLayoutClip(layoutSlotSize) : null;
         }
@@ -55,11 +55,11 @@ namespace Yumikou.Wpf.Controls
             base.OnRender(dc);
 
             BoxShadows? boxShadows = BoxShadows;
-            if (boxShadows != null && boxShadows.Count > 0)
+            if (boxShadows is not null && boxShadows.Count > 0)
             {
                 CornerRadius cornerRadius = CornerRadius;
                 Thickness borders = BorderThickness;
-                Rect innerRect = new Rect(this.RenderSize); //阴影的内层Rect
+                Rect borderOuterRect = new Rect(this.RenderSize);
 #if NET46_OR_GREATER || NETCOREAPP
                 if (this.UseLayoutRounding)
                 {
@@ -68,20 +68,16 @@ namespace Yumikou.Wpf.Controls
                        LayoutHelper.RoundLayoutValue(borders.Right, dpi.DpiScaleX), LayoutHelper.RoundLayoutValue(borders.Bottom, dpi.DpiScaleY));
                 }
 #endif
-                Radii innerRadii = new Radii(cornerRadius, borders, true); //阴影的内层圆角半径
-                StreamGeometry innerGeometry = new StreamGeometry();
-                using (StreamGeometryContext ctx = innerGeometry.Open())
-                {
-                    if (!MathHelper.IsZero(innerRect.Width) && !MathHelper.IsZero(innerRect.Height))
-                    {
-                        DrawingHelper.GenerateRoundedRectangleGeometry(ctx, innerRect, innerRadii);
-                    }
-                }
-                innerGeometry.Freeze();
-
+                Rect borderInnerRect = DrawingHelper.DeflateRect(borderOuterRect, borders);
+                Radii borderOuterRadii = new Radii(cornerRadius, borders, true);
+                Radii borderInnerRadii = new Radii(cornerRadius, borders, false);
+                StreamGeometry? borderOuterGeometry = null;
+                StreamGeometry? borderInnerGeometry = null;
                 foreach (BoxShadow boxShadow in boxShadows)
                 {
-                    if (boxShadow.Brush != null)
+                    if (boxShadow.Brush is not null 
+                        && ((boxShadow.IsInset && !MathHelper.IsZero(borderInnerRect.Width) && !MathHelper.IsZero(borderInnerRect.Height)) 
+                            || (!boxShadow.IsInset && !MathHelper.IsZero(borderOuterRect.Width) && !MathHelper.IsZero(borderOuterRect.Height))))
                     {
                         Thickness spreadBorders = new Thickness(boxShadow.SpreadRadius);
 #if NET46_OR_GREATER || NETCOREAPP
@@ -92,40 +88,83 @@ namespace Yumikou.Wpf.Controls
                                 LayoutHelper.RoundLayoutValue(spreadBorders.Right, dpi.DpiScaleX), LayoutHelper.RoundLayoutValue(spreadBorders.Bottom, dpi.DpiScaleY));
                         }
 #endif
-                        Radii outerRadii = new Radii(innerRadii, spreadBorders, true, 1);
-                        Rect outerRect = DrawingHelper.InflateRect(innerRect, spreadBorders, boxShadow.OffsetX, boxShadow.OffsetY);
-
-                        StreamGeometry outerGeometry = new StreamGeometry();
-                        using (StreamGeometryContext ctx = outerGeometry.Open())
+                        if (boxShadow.IsInset)
                         {
-                            DrawingHelper.GenerateRoundedRectangleGeometry(ctx, outerRect, outerRadii);
-                        }
-                        outerGeometry.Freeze();
-
-                        if (!MathHelper.IsZero(boxShadow.BlurRadius))
-                        {
-                            DrawingVisual outerShadowDv = new DrawingVisual();
-                            using (var outerShadowDvContext = outerShadowDv.RenderOpen())
+                            if (borderInnerGeometry is null)
                             {
-                                outerShadowDvContext.DrawGeometry(boxShadow.Brush, null, outerGeometry);
+                                borderInnerGeometry = new StreamGeometry();
+                                using (StreamGeometryContext ctx = borderInnerGeometry.Open())
+                                {
+                                    DrawingHelper.GenerateRoundedRectangleGeometry(ctx, borderInnerRect, borderInnerRadii);
+                                }
+                                borderInnerGeometry.Freeze();
                             }
-                            outerShadowDv.Effect = new BlurEffect()
+
+                            Radii insetRadii = new Radii(borderInnerRadii, spreadBorders, false, 1);
+                            Rect insetRect = DrawingHelper.DeflateRect(borderInnerRect, spreadBorders, boxShadow.OffsetX, boxShadow.OffsetY);
+                            StreamGeometry insetGeometry = new StreamGeometry();
+                            using (StreamGeometryContext ctx = insetGeometry.Open())
                             {
-                                Radius = boxShadow.BlurRadius,
-                                KernelType = boxShadow.BlurKernelType,
-                                RenderingBias = boxShadow.BlurRenderingBias
-                            };
-                            VisualBrush outerShadowVb = new VisualBrush();
-                            outerShadowVb.Visual = outerShadowDv;
-                            Rect outerShadowRect = DrawingHelper.InflateRect(outerRect, new Thickness(boxShadow.BlurRadius));
-                            RectangleGeometry outerShadowRectGeometry = new RectangleGeometry(outerShadowRect);
-                            PathGeometry shadowGeometry = CombinedGeometry.Combine(outerShadowRectGeometry, innerGeometry, GeometryCombineMode.Exclude, null);
-                            dc.DrawGeometry(outerShadowVb, null, shadowGeometry);
-                        }
-                        else //当模糊度为0时，直接绘制
-                        {
-                            PathGeometry shadowGeometry = CombinedGeometry.Combine(outerGeometry, innerGeometry, GeometryCombineMode.Exclude, null);
+                                DrawingHelper.GenerateRoundedRectangleGeometry(ctx, insetRect, insetRadii);
+                            }
+                            insetGeometry.Freeze();
+
+                            //if (!MathHelper.IsZero(boxShadow.BlurRadius)) //TODO: inset blur effect, may need to customize the effect
+                            //{
+
+                            //}
+                            //else
+                            //{
+                            PathGeometry shadowGeometry = CombinedGeometry.Combine(borderInnerGeometry, insetGeometry, GeometryCombineMode.Exclude, null);
                             dc.DrawGeometry(boxShadow.Brush, null, shadowGeometry);
+                            //}
+                        }
+                        else
+                        {
+                            if (borderOuterGeometry is null)
+                            {
+                                borderOuterGeometry = new StreamGeometry();
+                                using (StreamGeometryContext ctx = borderOuterGeometry.Open())
+                                {
+                                    DrawingHelper.GenerateRoundedRectangleGeometry(ctx, borderOuterRect, borderOuterRadii);
+                                }
+                                borderOuterGeometry.Freeze();
+                            }
+
+                            Radii outerRadii = new Radii(borderOuterRadii, spreadBorders, true, 1);
+                            Rect outerRect = DrawingHelper.InflateRect(borderOuterRect, spreadBorders, boxShadow.OffsetX, boxShadow.OffsetY);
+                            StreamGeometry outerGeometry = new StreamGeometry();
+                            using (StreamGeometryContext ctx = outerGeometry.Open())
+                            {
+                                DrawingHelper.GenerateRoundedRectangleGeometry(ctx, outerRect, outerRadii);
+                            }
+                            outerGeometry.Freeze();
+
+                            if (!MathHelper.IsZero(boxShadow.BlurRadius))
+                            {
+                                DrawingVisual outerShadowDv = new DrawingVisual();
+                                using (var outerShadowDvContext = outerShadowDv.RenderOpen())
+                                {
+                                    outerShadowDvContext.DrawGeometry(boxShadow.Brush, null, outerGeometry);
+                                }
+                                outerShadowDv.Effect = new BlurEffect()
+                                {
+                                    Radius = boxShadow.BlurRadius,
+                                    KernelType = boxShadow.BlurKernelType,
+                                    RenderingBias = boxShadow.BlurRenderingBias
+                                };
+                                VisualBrush outerShadowVb = new VisualBrush();
+                                outerShadowVb.Visual = outerShadowDv;
+                                Rect outerShadowRect = DrawingHelper.InflateRect(outerRect, new Thickness(boxShadow.BlurRadius));
+                                RectangleGeometry outerShadowRectGeometry = new RectangleGeometry(outerShadowRect);
+                                PathGeometry shadowGeometry = CombinedGeometry.Combine(outerShadowRectGeometry, borderOuterGeometry, GeometryCombineMode.Exclude, null);
+                                dc.DrawGeometry(outerShadowVb, null, shadowGeometry);
+                            }
+                            else
+                            {
+                                PathGeometry shadowGeometry = CombinedGeometry.Combine(outerGeometry, borderOuterGeometry, GeometryCombineMode.Exclude, null);
+                                dc.DrawGeometry(boxShadow.Brush, null, shadowGeometry);
+                            }
                         }
                     }
                 }

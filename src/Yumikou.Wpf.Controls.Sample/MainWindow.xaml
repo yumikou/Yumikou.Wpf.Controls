@@ -10,10 +10,10 @@
     <Grid>
         <TabControl TabStripPlacement="Left">
             <TabItem Header="Border">
-                <ymk:Border Grid.Row="1" Width="100" Height="100" Background="Transparent" CornerRadius="30" UseLayoutRounding="True">
+                <ymk:Border Grid.Row="1" Width="100" Height="100" Background="Transparent" BorderThickness="1" BorderBrush="DarkGreen" CornerRadius="30">
                     <ymk:Border.BoxShadows>
                         <ymk:BoxShadow BlurRadius="0" SpreadRadius="10" Brush="#6600ff00" OffsetX="0" OffsetY="0"></ymk:BoxShadow>
-                        <ymk:BoxShadow BlurRadius="20" SpreadRadius="5" Brush="#88ff0000" OffsetX="20" OffsetY="20"></ymk:BoxShadow>
+                        <ymk:BoxShadow BlurRadius="20" SpreadRadius="5" Brush="#88ff0000" OffsetX="15" OffsetY="15"></ymk:BoxShadow>
                     </ymk:Border.BoxShadows>
                 </ymk:Border>
             </TabItem>

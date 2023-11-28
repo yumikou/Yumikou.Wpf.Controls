@@ -156,7 +156,7 @@ namespace Yumikou.Wpf.Controls.Helpers
         /// <param name="rt"></param>
         /// <param name="thick"></param>
         /// <returns></returns>
-        private static Rect DeflateRect(Rect rt, Thickness thick, double offsetX = 0, double offsetY = 0)
+        public static Rect DeflateRect(Rect rt, Thickness thick, double offsetX = 0, double offsetY = 0)
         {
             return new Rect(rt.Left + thick.Left + offsetX,
                             rt.Top + thick.Top + offsetY,

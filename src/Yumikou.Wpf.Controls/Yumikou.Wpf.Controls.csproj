@@ -12,7 +12,15 @@
     <PackageTags>wpf;boxshadow;box;shadow;spacing;wrappanel;</PackageTags>
     <PackageProjectUrl>https://github.com/yumikou/Yumikou.Wpf.Controls</PackageProjectUrl>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <Version>1.0.1</Version>
+    <Version>1.0.2</Version>
+    <PackageReadmeFile>readme.md</PackageReadmeFile>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\..\readme.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
 
 </Project>

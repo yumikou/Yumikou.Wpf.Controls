@@ -8,12 +8,13 @@ using System.Windows.Media.Effects;
 
 namespace Yumikou.Wpf.Controls
 {
-    /// <summary>
-    /// TODO: 内阴影IsInset
-    /// </summary>
     public class BoxShadow : Freezable
     {
-        //public bool IsInset { get; set; } = false;
+        public bool IsInset
+        {
+            get { return (bool)GetValue(IsInsetProperty); }
+            set { SetValue(IsInsetProperty, value); }
+        }
 
         public double OffsetX
         {
@@ -33,9 +34,6 @@ namespace Yumikou.Wpf.Controls
             set { SetValue(SpreadRadiusProperty, value); }
         }
 
-        /// <summary>
-        /// 模糊半径
-        /// </summary>
         public double BlurRadius
         {
             get { return (double)GetValue(BlurRadiusProperty); }
@@ -59,6 +57,13 @@ namespace Yumikou.Wpf.Controls
             get { return (Brush?)GetValue(BrushProperty); }
             set { SetValue(BrushProperty, value); }
         }
+
+        /// <summary>
+        /// DependencyProperty for <see cref="IsInset" /> property.
+        /// </summary>
+        public static readonly DependencyProperty IsInsetProperty
+            = DependencyProperty.Register("IsInset", typeof(bool), typeof(BoxShadow),
+                                          new PropertyMetadata(BooleanBoxes.FalseBox));
 
         /// <summary>
         /// DependencyProperty for <see cref="OffsetX" /> property.

@@ -24,10 +24,10 @@ Supporting .NET Framework 4.0 and greater, .NET Core 3.0 and greater(on Windows)
 3. The control use cases:
    #### Border with BoxShadow
    ```xaml
-    <ymk:Border Width="100" Height="100" Background="Transparent" CornerRadius="30">
+    <ymk:Border Grid.Row="1" Width="100" Height="100" Background="Transparent" BorderThickness="1" BorderBrush="DarkGreen" CornerRadius="30">
         <ymk:Border.BoxShadows>
-            <ymk:BoxShadow Blur="0" Spread="10" Brush="#6600ff00" OffsetX="0" OffsetY="0"></ymk:BoxShadow>
-            <ymk:BoxShadow Blur="20" Spread="5" Brush="#88ff0000" OffsetX="20" OffsetY="20"></ymk:BoxShadow>
+            <ymk:BoxShadow BlurRadius="0" SpreadRadius="10" Brush="#6600ff00" OffsetX="0" OffsetY="0"></ymk:BoxShadow>
+            <ymk:BoxShadow BlurRadius="20" SpreadRadius="5" Brush="#88ff0000" OffsetX="15" OffsetY="15"></ymk:BoxShadow>
         </ymk:Border.BoxShadows>
     </ymk:Border>
    ```
@@ -44,5 +44,5 @@ Supporting .NET Framework 4.0 and greater, .NET Core 3.0 and greater(on Windows)
    <img alt="WrapPanel can adjust the spacing" src="./docs/WrapPanel.png">
 
 ## TODO
-   - Inset BoxShadow
+   - Blur effect of inset BoxShadow
    - Grid has lines
