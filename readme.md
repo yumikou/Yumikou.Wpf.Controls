@@ -1,11 +1,8 @@
 ﻿## About 
-<p>
-Extended controls for Wpf. The Border has BoxShadow like as Web css3, a WrapPanel that can adjust the spacing.
-</p>
 
-<p>
+Extended controls for Wpf. The Border has BoxShadow like as Web css3, a WrapPanel that can adjust the spacing.
+
 Supporting .NET Framework 4.0 and greater, .NET Core 3.0 and greater(on Windows)
-</p>
 
 ## How to use
 1. Add nuget package to your project:
@@ -31,7 +28,7 @@ Supporting .NET Framework 4.0 and greater, .NET Core 3.0 and greater(on Windows)
         </ymk:Border.BoxShadows>
     </ymk:Border>
    ```
-   <img alt="Border with BoxShadow" src="./docs/Border.png" />
+   <img alt="Border with BoxShadow" src="https://github.com/yumikou/Yumikou.Wpf.Controls/raw/master/docs/Border.png" />
 
    #### WrapPanel can adjust the spacing
    ```xaml
@@ -41,7 +38,7 @@ Supporting .NET Framework 4.0 and greater, .NET Core 3.0 and greater(on Windows)
         ...
     </ymk:WrapPanel>
    ```
-   <img alt="WrapPanel can adjust the spacing" src="./docs/WrapPanel.png">
+   <img alt="WrapPanel can adjust the spacing" src="https://github.com/yumikou/Yumikou.Wpf.Controls/raw/master/docs/WrapPanel.png">
 
 ## TODO
    - Blur effect of inset BoxShadow

@@ -14,6 +14,7 @@
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <Version>1.0.2</Version>
     <PackageReadmeFile>readme.md</PackageReadmeFile>
+    <RepositoryUrl>https://github.com/yumikou/Yumikou.Wpf.Controls</RepositoryUrl>
   </PropertyGroup>
 
   <ItemGroup>
