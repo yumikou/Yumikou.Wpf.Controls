@@ -38,6 +38,9 @@
                     <Button>Button</Button>
                 </ymk:WrapPanel>
             </TabItem>
+            <TabItem Header="StackPanel">
+                <StackPanel></StackPanel>
+            </TabItem>
         </TabControl>
     </Grid>
 </Window>
