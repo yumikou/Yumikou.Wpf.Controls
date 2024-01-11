@@ -39,7 +39,23 @@
                 </ymk:WrapPanel>
             </TabItem>
             <TabItem Header="StackPanel">
-                <StackPanel></StackPanel>
+                <Border BorderBrush="Black" Background="White" BorderThickness="2" Width="500" Height="500">
+                    <ScrollViewer Name="sv1" CanContentScroll="True" VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Visible">
+                        <ymk:StackPanel Name="sp1" Spacing="10">
+                            <Button>Button 1</Button>
+                            <Button>Button 2</Button>
+                            <Button>Button 3</Button>
+                            <Button>Button 4</Button>
+                            <Button>Button 5</Button>
+                            <Rectangle Width="700" Height="500" Fill="Purple"/>
+                            <TextBlock>Rectangle 1</TextBlock>
+                            <Rectangle Width="700" Height="400" Fill="Red"/>
+                            <TextBlock>Rectangle 2</TextBlock>
+                            <Rectangle Width="700" Height="600" Fill="Green"/>
+                            <TextBlock Height="80">Rectangle 3</TextBlock>
+                        </ymk:StackPanel>
+                    </ScrollViewer>
+                </Border>
             </TabItem>
         </TabControl>
     </Grid>
