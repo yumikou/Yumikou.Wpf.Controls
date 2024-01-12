@@ -1,6 +1,6 @@
 ﻿## About 
 
-Extended controls for Wpf. The Border has BoxShadow like as Web css3, a WrapPanel that can adjust the spacing.
+Enhanced controls for Wpf. The Border has BoxShadow like as Web css3. Some controls that can adjust the spacing such as WrapPanel and StackPanel.
 
 Supporting .NET Framework 4.0 and greater, .NET Core 3.0 and greater(on Windows)
 

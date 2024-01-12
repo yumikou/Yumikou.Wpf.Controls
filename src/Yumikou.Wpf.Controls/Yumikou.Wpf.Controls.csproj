@@ -8,18 +8,14 @@
     <LangVersion>10.0</LangVersion>
     <Title>Yumikou.Wpf.Controls</Title>
     <Authors>yumikou</Authors>
-    <Description>Extended controls for Wpf. The Border has BoxShadow like as Web css3, a WrapPanel that can adjust the spacing.</Description>
-    <PackageTags>wpf;boxshadow;box;shadow;spacing;wrappanel;</PackageTags>
+    <Description>Enhanced controls for Wpf. The Border has BoxShadow like as Web css3. Some controls that can adjust the spacing such as WrapPanel and StackPanel.</Description>
+    <PackageTags>wpf;boxshadow;box;shadow;spacing;wrappanel;stackpanel;</PackageTags>
     <PackageProjectUrl>https://github.com/yumikou/Yumikou.Wpf.Controls</PackageProjectUrl>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <Version>1.0.3</Version>
     <PackageReadmeFile>readme.md</PackageReadmeFile>
     <RepositoryUrl>https://github.com/yumikou/Yumikou.Wpf.Controls</RepositoryUrl>
   </PropertyGroup>
-
-  <ItemGroup>
-    <Compile Remove="StackPanel_2.cs" />
-  </ItemGroup>
 
   <ItemGroup>
     <None Include="..\..\readme.md">
