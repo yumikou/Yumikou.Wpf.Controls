@@ -1,5 +1,5 @@
 ﻿using MS.Internal;
- 
+
 using System;
 using System.Collections;
 using System.Collections.Specialized;
@@ -48,7 +48,6 @@ namespace Yumikou.Wpf.Controls
     {
         internal const double _scrollLineDelta = 16.0;   // Default physical amount to scroll with one Up/Down/Left/Right key
         internal const double _mouseWheelDelta = 48.0;   // Default physical amount to scroll with one MouseWheel.
-
         //-------------------------------------------------------------------
         //
         //  Constructors
@@ -533,13 +532,13 @@ namespace Yumikou.Wpf.Controls
             else
                 return RealMeasureOverride(constraint);
         }
- 
+
         // this is a handy place to start/stop profiling
         private Size MeasureOverrideProfileStub(Size constraint)
         {
             return RealMeasureOverride(constraint);
         }
- 
+
         private Size RealMeasureOverride(Size constraint)
         {
 #endif
@@ -573,6 +572,7 @@ namespace Yumikou.Wpf.Controls
             Size stackDesiredSize = new Size();
             UIElementCollection children = measureElement.InternalChildren;
             double spacing = measureElement.Spacing;
+            bool spacingSet = !MathHelper.IsNaN(spacing);
             Size layoutSlotSize = constraint;
             bool fHorizontal = (measureElement.Orientation == Orientation.Horizontal);
             int firstViewport;          // First child index in the viewport.
@@ -618,14 +618,22 @@ namespace Yumikou.Wpf.Controls
                 // Accumulate child size.
                 if (fHorizontal)
                 {
-                    stackDesiredSize.Width += childDesiredSize.Width + (i > 0 ? spacing : 0); //Add:
+                    stackDesiredSize.Width += childDesiredSize.Width;
+                    if (spacingSet && i > 0) // Add Spacing
+                    {
+                        stackDesiredSize.Width += spacing;
+                    }
                     stackDesiredSize.Height = Math.Max(stackDesiredSize.Height, childDesiredSize.Height);
                     childLogicalSize = childDesiredSize.Width;
                 }
                 else
                 {
                     stackDesiredSize.Width = Math.Max(stackDesiredSize.Width, childDesiredSize.Width);
-                    stackDesiredSize.Height += childDesiredSize.Height + (i > 0 ? spacing : 0); //Add:
+                    stackDesiredSize.Height += childDesiredSize.Height;
+                    if (spacingSet && i > 0) // Add Spacing
+                    {
+                        stackDesiredSize.Height += spacing;
+                    }
                     childLogicalSize = childDesiredSize.Height;
                 }
 
@@ -741,6 +749,7 @@ namespace Yumikou.Wpf.Controls
         {
             UIElementCollection children = arrangeElement.InternalChildren;
             double spacing = arrangeElement.Spacing;
+            bool spacingSet = !MathHelper.IsNaN(spacing);
             bool fHorizontal = (arrangeElement.Orientation == Orientation.Horizontal);
             Rect rcChild = new Rect(arrangeSize);
             double previousChildSize = 0.0;
@@ -774,14 +783,22 @@ namespace Yumikou.Wpf.Controls
 
                 if (fHorizontal)
                 {
-                    rcChild.X += previousChildSize + (i > 0 ? spacing : 0); //Add:
+                    rcChild.X += previousChildSize;
+                    if (spacingSet && i > 0) // Add Spacing
+                    {
+                        rcChild.X += spacing;
+                    }
                     previousChildSize = child.DesiredSize.Width;
                     rcChild.Width = previousChildSize;
                     rcChild.Height = Math.Max(arrangeSize.Height, child.DesiredSize.Height);
                 }
                 else
                 {
-                    rcChild.Y += previousChildSize + (i > 0 ? spacing : 0); //Add:
+                    rcChild.Y += previousChildSize;
+                    if (spacingSet && i > 0) // Add Spacing
+                    {
+                        rcChild.Y += spacing;
+                    }
                     previousChildSize = child.DesiredSize.Height;
                     rcChild.Height = previousChildSize;
                     rcChild.Width = Math.Max(arrangeSize.Width, child.DesiredSize.Width);
@@ -853,6 +870,8 @@ namespace Yumikou.Wpf.Controls
         private static double ComputePhysicalFromLogicalOffset(IStackMeasure arrangeElement, double logicalOffset, bool fHorizontal)
         {
             double physicalOffset = 0.0;
+            double spacing = arrangeElement.Spacing;
+            bool spacingSet = !MathHelper.IsNaN(spacing);
 
             UIElementCollection children = arrangeElement.InternalChildren;
             Debug.Assert(logicalOffset == 0 || (logicalOffset > 0 && logicalOffset < children.Count));
@@ -862,6 +881,10 @@ namespace Yumikou.Wpf.Controls
                 physicalOffset -= (fHorizontal)
                     ? ((UIElement)children[i]).DesiredSize.Width
                     : ((UIElement)children[i]).DesiredSize.Height;
+                if (spacingSet) // Add Spacing
+                {
+                    physicalOffset -= spacing;
+                }
             }
 
             return physicalOffset;
@@ -879,7 +902,7 @@ namespace Yumikou.Wpf.Controls
                 parent = VisualTreeHelper.GetParent(dependencyObjectChild);
                 if (parent == null)
                 {
-                    //throw new ArgumentException(SR.Get(SRID.Stack_VisualInDifferentSubTree), "child");
+                    //throw new ArgumentException(SR.Stack_VisualInDifferentSubTree, "child");
                     throw new ArgumentException("the child Stack Visual in different SubTree");
                 }
             }
