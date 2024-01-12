@@ -40,6 +40,15 @@ Supporting .NET Framework 4.0 and greater, .NET Core 3.0 and greater(on Windows)
    ```
    ![WrapPanel can adjust the spacing](https://raw.githubusercontent.com/yumikou/Yumikou.Wpf.Controls/master/docs/WrapPanel.png)
 
+   #### StackPanel can adjust the spacing
+   ```xaml
+    <ymk:StackPanel Spacing="10" Orientation="Horizontal" VerticalAlignment="Top">
+        <Button>Button</Button>
+        <Button>Button</Button>
+        ...            
+    </ymk:StackPanel>
+   ```
+   ![StackPanel can adjust the spacing](https://raw.githubusercontent.com/yumikou/Yumikou.Wpf.Controls/master/docs/StackPanel.png)
 ## TODO
    - Blur effect of inset BoxShadow
    - Grid has lines
